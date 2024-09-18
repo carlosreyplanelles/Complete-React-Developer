@@ -1,10 +1,10 @@
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
-  signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
@@ -58,4 +58,22 @@ export const createUserDoc = async (userAuth, additionalInfo = {}) => {
 export const createAuthUserWithEmailAndPaswsword = async (email, password) => {
   if (!email || !password) return;
   return await createUserWithEmailAndPassword(auth, email, password);
+};
+
+export const validateAuthUserWithEmailAndPaswsword = async (
+  email,
+  password
+) => {
+  try {
+    const userCred = await signInWithEmailAndPassword(auth, email, password);
+    console.log(userCred);
+  } catch (e) {
+    switch (e.code) {
+      case "auth/invalid-credential":
+        alert("Email/password is invalid");
+        break;
+      default:
+        console.log(e);
+    }
+  }
 };
