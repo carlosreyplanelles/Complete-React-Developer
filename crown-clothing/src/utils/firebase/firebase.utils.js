@@ -5,6 +5,7 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
@@ -66,7 +67,7 @@ export const validateAuthUserWithEmailAndPaswsword = async (
 ) => {
   try {
     const userCred = await signInWithEmailAndPassword(auth, email, password);
-    console.log(userCred);
+    return userCred;
   } catch (e) {
     switch (e.code) {
       case "auth/invalid-credential":
@@ -76,4 +77,8 @@ export const validateAuthUserWithEmailAndPaswsword = async (
         console.log(e);
     }
   }
+};
+
+export const SignOutHandler = async () => {
+  return await signOut(auth);
 };

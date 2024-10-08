@@ -1,4 +1,3 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
 import {
   signInWithGooglePopUp,
   createUserDoc,
@@ -7,7 +6,8 @@ import {
 
 import { Button } from "../button/button.component";
 import { FormInput } from "../form-input/form-input.component";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../../contexts/user.context";
 
 import "./sign-in-form.styles.scss";
 
@@ -16,13 +16,20 @@ const userLoginInfo = {
   password: "",
 };
 
+const defaultValues = {
+  email: "",
+  password: "",
+};
+
 export function SignInForm() {
+  const [formFields, setFormFields] = useState(userLoginInfo);
+  const { email, password } = formFields;
+  const {setCurrentUser} = useContext(UserContext)
   const GooglePopupAccess = async () => {
     const { user } = await signInWithGooglePopUp();
     createUserDoc(user);
   };
-  const [formFields, setFormFields] = useState(userLoginInfo);
-  const { email, password } = formFields;
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
@@ -31,7 +38,9 @@ export function SignInForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await validateAuthUserWithEmailAndPaswsword(email, password);
+      const {user} = await validateAuthUserWithEmailAndPaswsword(email, password);
+      setCurrentUser(user);
+      setFormFields(defaultValues)
     } catch (error) {
       switch (error.code) {
         case "auth/invalid-credential":

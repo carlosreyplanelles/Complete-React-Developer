@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   createAuthUserWithEmailAndPaswsword,
   createUserDoc,
@@ -7,8 +7,19 @@ import {
 import { FormInput } from "../form-input/form-input.component";
 import { Button } from "../button/button.component";
 import "./sign-up-form.styles.scss";
+import { UserContext } from "../../contexts/user.context";
+
+
+
 
 const formValues = {
+  displayName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
+
+const defaultValues = {
   displayName: "",
   email: "",
   password: "",
@@ -18,6 +29,7 @@ const formValues = {
 export function SignUpForm() {
   const [formFields, setFormFields] = useState(formValues);
   const { displayName, email, password, confirmPassword } = formFields;
+  const {setCurrentUser} = useContext(UserContext)
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -27,7 +39,7 @@ export function SignUpForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const {
-      displayName: { value },
+      displayName,
       email,
       password,
       confirmPassword,
@@ -45,6 +57,8 @@ export function SignUpForm() {
       await createUserDoc(user, { displayName });
       /*DisplayName option 2 - sent the display name for the user that has been created through the form
       user.displayName = displayName;*/
+      setCurrentUser(user)
+      setFormFields(defaultValues)
     } catch (error) {
       alert(error.message);
     }
