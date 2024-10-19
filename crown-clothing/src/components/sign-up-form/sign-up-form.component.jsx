@@ -9,9 +9,6 @@ import { Button } from "../button/button.component";
 import "./sign-up-form.styles.scss";
 import { UserContext } from "../../contexts/user.context";
 
-
-
-
 const formValues = {
   displayName: "",
   email: "",
@@ -29,7 +26,7 @@ const defaultValues = {
 export function SignUpForm() {
   const [formFields, setFormFields] = useState(formValues);
   const { displayName, email, password, confirmPassword } = formFields;
-  const {setCurrentUser} = useContext(UserContext)
+  const { setCurrentUser } = useContext(UserContext);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -38,14 +35,10 @@ export function SignUpForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const {
-      displayName,
-      email,
-      password,
-      confirmPassword,
-    } = event.target;
+    const { displayName, email, password, confirmPassword } = event.target;
+
     if (password.value !== confirmPassword.value) {
-      alert("passowrd do not match");
+      alert("password do not match");
       return;
     }
     try {
@@ -53,12 +46,13 @@ export function SignUpForm() {
         email.value,
         password.value
       );
+      user.displayName = displayName.value;
       //DisplayName Option 1 - Create a new document into a database collection to add the displaName info
-      await createUserDoc(user, { displayName });
+      await createUserDoc(user);
       /*DisplayName option 2 - sent the display name for the user that has been created through the form
       user.displayName = displayName;*/
-      setCurrentUser(user)
-      setFormFields(defaultValues)
+      setCurrentUser(user);
+      setFormFields(defaultValues);
     } catch (error) {
       alert(error.message);
     }
