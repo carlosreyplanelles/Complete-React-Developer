@@ -36,7 +36,6 @@ export const signInWithGooglePopUp = () =>
 export const db = getFirestore();
 
 export const createUserDoc = async (userAuth, additionalInfo = {}) => {
-  console.log(additionalInfo);
   if (!userAuth) return;
   const userDocRef = doc(db, "users", userAuth.uid);
   const userDocData = await getDoc(userDocRef);
