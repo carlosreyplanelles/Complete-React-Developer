@@ -4,29 +4,31 @@ import { CartContext } from "../../contexts/cart.context";
 import { CheckoutCard } from "../../components/checkout-card/checkout-card.componen";
 
 export function Checkout() {
-  const { cartItems } = useContext(CartContext);
-
-  const calculateTotalPrice = () => {
-    return cartItems.reduce((totalPrice, item) => {
-      return totalPrice + item.quantity * item.price;
-    }, 0);
-  };
-  const total = calculateTotalPrice();
-
-  console.log(cartItems);
+  const { cartItems, cartTotal } = useContext(CartContext);
 
   return (
-    <div>
-      {cartItems.map((item) => {
-        return (
-          <div key={item.id}>
-            <CheckoutCard basketItem={item} />
-          </div>
-        );
-      })}
-      <div>
-        <span>Total: {total}</span>
+    <div className="checkout-container">
+      <div className="checkout-header">
+        <div className="header-block">
+          <span>Product</span>
+        </div>
+        <div className="header-block">
+          <span>Description</span>
+        </div>
+        <div className="header-block">
+          <span>Quantity</span>
+        </div>
+        <div className="header-block">
+          <span>Price</span>
+        </div>
+        <div className="header-block">
+          <span>Remove</span>
+        </div>
       </div>
+      {cartItems.map((item) => {
+        return <CheckoutCard key={item.id} basketItem={item} />;
+      })}
+      <span className="total">Total: {cartTotal}€</span>
     </div>
   );
 }
