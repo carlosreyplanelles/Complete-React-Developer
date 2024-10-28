@@ -8,11 +8,11 @@ import { ReactComponent as CrownLogo } from "../../assets/crown.svg";
 import "./navigationBar.styles.scss";
 import { UserContext } from "../../contexts/user.context";
 import { SignOutHandler } from "../../utils/firebase/firebase.utils";
-import { NavigationContext } from "../../contexts/navigation.context";
+import { CartContext } from "../../contexts/cart.context";
 
 const NavigationBar = () => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
-  const { showMiniCart } = useContext(NavigationContext);
+  const { showMiniCart } = useContext(CartContext);
 
   const signOutHandler = async () => {
     await SignOutHandler();
