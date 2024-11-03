@@ -1,6 +1,5 @@
 import {
   signInWithGooglePopUp,
-  createUserDoc,
   validateAuthUserWithEmailAndPaswsword,
 } from "../../utils/firebase/firebase.utils";
 
@@ -8,7 +7,11 @@ import { Button } from "../button/button.component";
 import { FormInput } from "../form-input/form-input.component";
 import { useState } from "react";
 
-import "./sign-in-form.styles.scss";
+import {
+  SignInContainer,
+  Title,
+  ButtonsContainer,
+} from "./sign-in-form.styles";
 
 const userLoginInfo = {
   email: "",
@@ -49,8 +52,8 @@ export function SignInForm() {
     }
   };
   return (
-    <div className="sign-in-container">
-      <h1>SignIn</h1>
+    <SignInContainer>
+      <Title>SignIn</Title>
       <form onSubmit={handleSubmit}>
         <FormInput
           label="Email"
@@ -72,7 +75,7 @@ export function SignInForm() {
             required: true,
           }}
         />
-        <div className="buttons-container">
+        <ButtonsContainer>
           <Button text="SIGN IN" type="submit" />
           <Button
             type="button"
@@ -80,8 +83,8 @@ export function SignInForm() {
             buttonType="google"
             onClick={GooglePopupAccess}
           />
-        </div>
+        </ButtonsContainer>
       </form>
-    </div>
+    </SignInContainer>
   );
 }
