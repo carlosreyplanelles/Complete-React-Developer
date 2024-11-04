@@ -15,7 +15,6 @@ export const CategoriesProvider = ({ children }) => {
     //ALWAYS WRAP ASYNC CALLS INTO USE EFFECT IN A LOCAL VARIABLE!!!
     const getCategoriesMap = async () => {
       const categoriesMap = await getCategoriesAndDocs();
-      console.log(categoriesMap);
       setCategoriesMap(categoriesMap);
     };
     getCategoriesMap();

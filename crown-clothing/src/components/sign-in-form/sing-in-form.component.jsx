@@ -3,7 +3,7 @@ import {
   validateAuthUserWithEmailAndPaswsword,
 } from "../../utils/firebase/firebase.utils";
 
-import { Button } from "../button/button.component";
+import { Button, BUTTON_TYPE_CLASSES } from "../button/button.component";
 import { FormInput } from "../form-input/form-input.component";
 import { useState } from "react";
 
@@ -80,7 +80,7 @@ export function SignInForm() {
           <Button
             type="button"
             text="GOOGLE SIGN IN"
-            buttonType="google"
+            buttonType={BUTTON_TYPE_CLASSES.google}
             onClick={GooglePopupAccess}
           />
         </ButtonsContainer>

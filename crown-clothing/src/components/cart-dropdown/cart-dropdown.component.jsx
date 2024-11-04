@@ -1,7 +1,6 @@
 import {
   CartDropdownContainer,
   CartItems,
-  ButtonContainer,
   EmptyMessage,
 } from "./cart-dropdown.styles";
 
@@ -24,9 +23,13 @@ export function CartDropdown() {
   return (
     <CartDropdownContainer>
       <CartItems>
-        {cartItems.map((item) => {
-          return <CartItem key={item.id} cartItem={item} />;
-        })}
+        {cartItems.length ? (
+          cartItems.map((item) => {
+            return <CartItem key={item.id} cartItem={item} />;
+          })
+        ) : (
+          <EmptyMessage>Cart empty</EmptyMessage>
+        )}
       </CartItems>
       <Button onClick={goToCheckoutHandler} text="CHECKOUT" />
     </CartDropdownContainer>

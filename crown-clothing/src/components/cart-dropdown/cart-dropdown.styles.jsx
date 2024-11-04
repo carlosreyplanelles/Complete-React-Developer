@@ -1,5 +1,9 @@
 import styled from "styled-components";
-import { Button } from "../button/button.component";
+import {
+  BaseButton,
+  GoogleButton,
+  InvertedButton,
+} from "../button/button.styles";
 
 export const CartDropdownContainer = styled.div`
   position: absolute;
@@ -13,9 +17,15 @@ export const CartDropdownContainer = styled.div`
   top: 90px;
   right: 40px;
   z-index: 5;
+
+  ${BaseButton},
+  ${GoogleButton}, 
+  ${InvertedButton} {
+    margin-top: auto;
+  }
 `;
 
-export const EmptyMessage = styled.div`
+export const EmptyMessage = styled.span`
   font-size: 18px;
   margin: 50px auto;
 `;
@@ -25,10 +35,6 @@ export const CartItems = styled.div`
   display: flex;
   flex-direction: column;
   overflow: scroll;
-`;
-
-export const ButtonContainer = styled(Button)`
-  margin-top: auto;
 `;
 
 /* .cart-dropdown-container {

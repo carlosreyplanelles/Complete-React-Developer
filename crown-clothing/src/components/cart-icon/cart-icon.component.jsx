@@ -1,10 +1,5 @@
 import { useContext } from "react";
-import {
-  CartIconContainer,
-  ShoppingIconContainer,
-  ItemCount,
-} from "./cart-icon.styles";
-import { ReactComponent as ShoppingIcon } from "../../assets/shopping-bag.svg";
+import { CartIconContainer, ShoppingIcon, ItemCount } from "./cart-icon.styles";
 
 import { CartContext } from "../../contexts/cart.context";
 
@@ -17,9 +12,7 @@ export function CartIcon() {
 
   return (
     <CartIconContainer onClick={toggleShowMiniCart}>
-      <ShoppingIconContainer>
-        <ShoppingIcon className="shopping-icon" />
-      </ShoppingIconContainer>
+      <ShoppingIcon />
       <ItemCount>{itemsCount}</ItemCount>
     </CartIconContainer>
   );

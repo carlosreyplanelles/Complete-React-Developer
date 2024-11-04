@@ -5,11 +5,7 @@ export function FormInput({ label, inputOptions }) {
     <Group>
       <FormInputValue {...inputOptions} />
       {label && (
-        <FormInputLabel
-          className={`${
-            inputOptions.value.length ? "shrink" : ""
-          } form-input-label`}
-        >
+        <FormInputLabel shrink={inputOptions.value.length}>
           {label}
         </FormInputLabel>
       )}
